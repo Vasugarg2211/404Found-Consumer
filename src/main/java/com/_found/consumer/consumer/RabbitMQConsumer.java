@@ -14,6 +14,9 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Service
 public class RabbitMQConsumer {
 
@@ -32,6 +35,16 @@ public class RabbitMQConsumer {
             System.out.println("Host:" + rmqMessage.getHost().toString());
             RMQMessage.Host host = rmqMessage.getHost();
             System.out.println("Host:" + host.getName());
+
+            System.out.println(rmqMessage.getTimestamp());
+
+            ZonedDateTime zonedDateTime = ZonedDateTime.parse(rmqMessage.getTimestamp());
+            ZonedDateTime updatedTime = zonedDateTime.plusHours(5).plusMinutes(30);
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+            String formattedTime = updatedTime.format(formatter);
+            rmqMessage.setTimestamp(formattedTime);
+
+            System.out.println(rmqMessage.getTimestamp());
 
             // Persist the RMQMessage to Elasticsearch
             logRepo.save(rmqMessage);

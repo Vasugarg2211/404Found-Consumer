@@ -12,9 +12,9 @@ public interface LogRepo extends ElasticsearchRepository<RMQMessage, String>  {
     @Query("{ \"bool\": { \"must\": [ { \"term\": { \"host.name.keyword\": \"?0\" } } ] } }")
     List<RMQMessage> findByHostName(String hostName);
 
+    @Query("{\"bool\": {\"must\": [{\"range\": {\"timestamp\": {\"gte\": \"?0\", \"lte\": \"?1\", \"format\": \"yyyy-MM-dd'T'HH:mm:ss\"}}}]}}")
+    List<RMQMessage> findByTimeRange(String startTime, String endTime);
 
 
-        @Query("{\"bool\": {\"must\": [{\"range\": {\"timestamp\": {\"gte\": \"?0\", \"lte\": \"?1\", \"format\": \"yyyy-MM-dd'T'HH:mm:ss\"}}}]}}")
-        List<RMQMessage> findByTimeRange(String startTime, String endTime);
 
 }
