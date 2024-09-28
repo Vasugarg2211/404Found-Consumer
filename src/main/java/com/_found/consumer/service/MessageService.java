@@ -3,6 +3,9 @@ package com._found.consumer.service;
 import com._found.consumer.model.RMQMessage;
 import com._found.consumer.repo.LogRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +16,9 @@ public class MessageService {
     private LogRepo logRepo;
 
     public Iterable<RMQMessage> fetchAllMessages() {
-        return logRepo.findAll();
+        Pageable pageable = PageRequest.of(1, 20);
+        Page<RMQMessage> messagesPage = logRepo.findAll(pageable);
+        return messagesPage.getContent();
     }
 
 //    public List<RMQMessage> fetchMessagesByHostName(String hostName) {
