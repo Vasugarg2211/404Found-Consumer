@@ -28,11 +28,8 @@ public class MessageService {
         System.out.println("messages:" + messages.toString());
         return messages;
     }
-//
-//    public List<RMQMessage> getMessagesByTimestampRange(String startDate, String endDate) {
-////            Instant start = Instant.parse(startDate);
-////            Instant end = Instant.parse(endDate);
-//
-//            return logRepo.findByTimeRange(startDate, endDate);
-//    }
+
+    public List<RMQMessage> getMessagesByTimestampRange(String startDate, String endDate) {
+            return logRepo.findByTimeRange(startDate, endDate);
+    }
 }

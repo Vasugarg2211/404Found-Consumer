@@ -25,9 +25,9 @@ public class LogsController {
         return messageService.fetchMessagesByHostName(hostName);
     }
 
-//    @GetMapping("/messages/timestamp")
-//    public Iterable<RMQMessage> getMessagesByTimestampRange(@RequestParam String startDate, @RequestParam String endDate) {
-//        return messageService.getMessagesByTimestampRange(startDate, endDate);
-//    }
+    @GetMapping("/messages/timestamp")
+    public Iterable<RMQMessage> getMessagesByTimestampRange(@RequestParam String startDate, @RequestParam String endDate) {
+        return messageService.getMessagesByTimestampRange(startDate, endDate);
+    }
 
 }
