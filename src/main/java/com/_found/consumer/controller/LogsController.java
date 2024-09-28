@@ -4,6 +4,7 @@ import com._found.consumer.model.RMQMessage;
 import com._found.consumer.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +29,11 @@ public class LogsController {
     @GetMapping("/messages/timestamp")
     public Iterable<RMQMessage> getMessagesByTimestampRange(@RequestParam String startDate, @RequestParam String endDate) {
         return messageService.getMessagesByTimestampRange(startDate, endDate);
+    }
+
+    @GetMapping("/message/keyword")
+    public List<RMQMessage> getMessagesByWord(@RequestParam String word) {
+        return messageService.getExactMatch(word);
     }
 
 }

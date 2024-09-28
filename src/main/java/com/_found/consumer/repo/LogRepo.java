@@ -15,6 +15,18 @@ public interface LogRepo extends ElasticsearchRepository<RMQMessage, String>  {
     @Query("{\"bool\": {\"must\": [{\"range\": {\"timestamp\": {\"gte\": \"?0\", \"lte\": \"?1\", \"format\": \"yyyy-MM-dd'T'HH:mm:ss\"}}}]}}")
     List<RMQMessage> findByTimeRange(String startTime, String endTime);
 
-
-
+    @Query("""
+        {
+          "bool": {
+            "must": [
+              {
+                "match_phrase": {
+                  "message": "?0"
+                }
+              }
+            ]
+          }
+        }
+    """)
+    List<RMQMessage> findByExactMessage(String exactMessage);
 }

@@ -32,4 +32,8 @@ public class MessageService {
     public List<RMQMessage> getMessagesByTimestampRange(String startDate, String endDate) {
             return logRepo.findByTimeRange(startDate, endDate);
     }
+
+    public List<RMQMessage> getExactMatch(String exactMatch) {
+        return logRepo.findByExactMessage(exactMatch);
+    }
 }
