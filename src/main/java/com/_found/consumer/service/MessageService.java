@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -16,16 +17,22 @@ public class MessageService {
     private LogRepo logRepo;
 
     public Iterable<RMQMessage> fetchAllMessages() {
-        Pageable pageable = PageRequest.of(1, 20);
+        Pageable pageable = PageRequest.of(1, 40);
         Page<RMQMessage> messagesPage = logRepo.findAll(pageable);
         return messagesPage.getContent();
     }
 
-//    public List<RMQMessage> fetchMessagesByHostName(String hostName) {
-//        return repository.findByHostName(hostName);
-//    }
+    public List<RMQMessage> fetchMessagesByHostName(String hostName) {
+        System.out.println("hostname:" + hostName);
+        List<RMQMessage> messages = logRepo.findByHostName(hostName);
+        System.out.println("messages:" + messages.toString());
+        return messages;
+    }
 //
 //    public List<RMQMessage> getMessagesByTimestampRange(String startDate, String endDate) {
-//        return repository.findByTimestampRange(startDate, endDate);
+////            Instant start = Instant.parse(startDate);
+////            Instant end = Instant.parse(endDate);
+//
+//            return logRepo.findByTimeRange(startDate, endDate);
 //    }
 }
