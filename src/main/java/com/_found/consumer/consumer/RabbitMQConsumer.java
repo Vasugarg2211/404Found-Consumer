@@ -6,6 +6,7 @@ import com._found.consumer.config.RabbitMQConfig;
 //import com._found.consumer.repo.LogRepo;
 import com._found.consumer.model.RMQMessage;
 //import com._found.consumer.repo.LogRepo;
+//import com._found.consumer.repo.LogRepo;
 import com._found.consumer.repo.LogRepo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -6,7 +6,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 @Document(indexName = "rmq_messages")
 public class RMQMessage {
-    @Id
     private String id;
 
     @JsonProperty("@timestamp")

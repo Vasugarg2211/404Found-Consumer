@@ -10,17 +10,17 @@ import java.util.List;
 @Service
 public class MessageService {
     @Autowired
-    private LogRepo repository;
+    private LogRepo logRepo;
 
     public Iterable<RMQMessage> fetchAllMessages() {
-        return repository.findAll();
+        return logRepo.findAll();
     }
 
-    public List<RMQMessage> fetchMessagesByHostName(String hostName) {
-        return repository.findByHostName(hostName);
-    }
-
-    public List<RMQMessage> getMessagesByTimestampRange(String startDate, String endDate) {
-        return repository.findByTimestampRange(startDate, endDate);
-    }
+//    public List<RMQMessage> fetchMessagesByHostName(String hostName) {
+//        return repository.findByHostName(hostName);
+//    }
+//
+//    public List<RMQMessage> getMessagesByTimestampRange(String startDate, String endDate) {
+//        return repository.findByTimestampRange(startDate, endDate);
+//    }
 }
