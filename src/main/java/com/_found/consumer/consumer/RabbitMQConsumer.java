@@ -32,9 +32,9 @@ public class RabbitMQConsumer {
             // Convert the JSON message to the RMQMessage object
             RMQMessage rmqMessage = objectMapper.readValue(message, RMQMessage.class);
             System.out.println("RMQMessage:" + rmqMessage);
-            System.out.println("Host:" + rmqMessage.getHost().toString());
+//            System.out.println("Host:" + rmqMessage.getHost().toString());
             RMQMessage.Host host = rmqMessage.getHost();
-            System.out.println("Host:" + host.getName());
+//            System.out.println("Host:" + host.getName());
 
             System.out.println(rmqMessage.getTimestamp());
 

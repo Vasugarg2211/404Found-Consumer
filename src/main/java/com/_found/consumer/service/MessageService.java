@@ -17,7 +17,7 @@ public class MessageService {
     private LogRepo logRepo;
 
     public Iterable<RMQMessage> fetchAllMessages() {
-        Pageable pageable = PageRequest.of(1, 100);
+        Pageable pageable = PageRequest.of(1, 300);
         Page<RMQMessage> messagesPage = logRepo.findAll(pageable);
         return messagesPage.getContent();
     }

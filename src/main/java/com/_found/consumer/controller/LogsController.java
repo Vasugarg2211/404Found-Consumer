@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @RestController
@@ -27,11 +32,25 @@ public class LogsController {
     }
 
     @GetMapping("/messages/timestamp")
-    public Iterable<RMQMessage> getMessagesByTimestampRange(@RequestParam String startDate, @RequestParam String endDate) {
+    public Iterable<RMQMessage> getMessagesByTimestampRange(@RequestParam Integer interval) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
+        // Get the current time in UTC
+        ZonedDateTime currentTime = ZonedDateTime.now().withZoneSameInstant(java.time.ZoneOffset.UTC);
+
+        // Define the number of minutes to subtract
+
+        // Subtract x minutes from the current time
+        ZonedDateTime timeMinusXMinutes = currentTime.minus(interval, ChronoUnit.MINUTES);
+
+        // Format both times as strings
+        String endDate = currentTime.format(formatter);
+        String startDate = timeMinusXMinutes.format(formatter);
+        System.out.println(startDate + " " + endDate);
         return messageService.getMessagesByTimestampRange(startDate, endDate);
     }
 
-    @GetMapping("/message/keyword")
+    @GetMapping("/messages/keyword")
     public List<RMQMessage> getMessagesByWord(@RequestParam String word) {
         return messageService.getExactMatch(word);
     }
