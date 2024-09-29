@@ -3,10 +3,7 @@ package com._found.consumer.controller;
 import com._found.consumer.model.RMQMessage;
 import com._found.consumer.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.time.ZoneOffset;
@@ -15,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class LogsController {
 
