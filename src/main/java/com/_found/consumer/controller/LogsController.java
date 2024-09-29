@@ -36,15 +36,16 @@ public class LogsController {
         System.out.println(interval);
         // Get the current time in UTC
         ZonedDateTime currentTime = ZonedDateTime.now().withZoneSameInstant(java.time.ZoneOffset.UTC);
+        ZonedDateTime updatedTime = currentTime.plusHours(5).plusMinutes(30);
 
         // Define the number of minutes to subtract
         long number = Long.parseLong(interval);
 
         // Subtract x minutes from the current time
-        ZonedDateTime timeMinusXMinutes = currentTime.minus(number, ChronoUnit.MINUTES);
+        ZonedDateTime timeMinusXMinutes = updatedTime.minus(number, ChronoUnit.MINUTES);
 
         // Format both times as strings
-        String endDate = currentTime.format(formatter);
+        String endDate = updatedTime.format(formatter);
         String startDate = timeMinusXMinutes.format(formatter);
         String newStartDate = startDate.substring(0, startDate.length() - 5);
         String newEndDate = endDate.substring(0, endDate.length() - 5);
