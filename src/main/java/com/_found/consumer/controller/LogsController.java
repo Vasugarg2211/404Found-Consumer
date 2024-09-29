@@ -32,22 +32,26 @@ public class LogsController {
     }
 
     @GetMapping("/messages/timestamp")
-    public Iterable<RMQMessage> getMessagesByTimestampRange(@RequestParam Integer interval) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+    public Iterable<RMQMessage> getMessagesByTimestampRange(@RequestParam String interval) {
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        System.out.println(interval);
         // Get the current time in UTC
         ZonedDateTime currentTime = ZonedDateTime.now().withZoneSameInstant(java.time.ZoneOffset.UTC);
 
         // Define the number of minutes to subtract
+        long number = Long.parseLong(interval);
 
         // Subtract x minutes from the current time
-        ZonedDateTime timeMinusXMinutes = currentTime.minus(interval, ChronoUnit.MINUTES);
+        ZonedDateTime timeMinusXMinutes = currentTime.minus(number, ChronoUnit.MINUTES);
 
         // Format both times as strings
         String endDate = currentTime.format(formatter);
         String startDate = timeMinusXMinutes.format(formatter);
-        System.out.println(startDate + " " + endDate);
-        return messageService.getMessagesByTimestampRange(startDate, endDate);
+        String newStartDate = startDate.substring(0, startDate.length() - 5);
+        String newEndDate = endDate.substring(0, endDate.length() - 5);
+        System.out.println(newStartDate + " " + newEndDate);
+        return messageService.getMessagesByTimestampRange(newStartDate, newEndDate);
     }
 
     @GetMapping("/messages/keyword")
